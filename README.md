@@ -1,3 +1,9 @@
-# Hough transform and Canny edge detector implementation
+# Implemented:
+* Canny edge detector
+* Hough transform
+* FAST corner detector
+* BRIEF descriptor
+
+
 
 Used libraries: numpy, PIL, matplotlib.pyplot

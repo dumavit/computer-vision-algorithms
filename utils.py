@@ -5,7 +5,7 @@ from PIL import Image as pil_image
 
 def zero_padding(im, padding_size):
     # Wrap image with zero rows and columns
-    width, height, channels = im.shape
+    height, width, channels = im.shape
 
     hzeros = np.zeros((width, padding_size, channels))
     vzeros = np.zeros((padding_size, height + 2 * padding_size, channels))
@@ -16,7 +16,9 @@ def zero_padding(im, padding_size):
 def convolve_image(im, kernel):
     # Apply convolution for every image channel. 
     # Use zero_padding to preserve image shape.
-    width, height, channels = im.shape
+    if im.ndim == 2:
+        im = im.reshape((im.shape[0], im.shape[1], 1))
+    height, width, channels = im.shape
     kernel_size, _ = kernel.shape
     padding = kernel_size // 2
 
@@ -30,3 +32,4 @@ def convolve_image(im, kernel):
                 result[i, j, channel] = np.sum(np.multiply(kernel, patch))
 
     return result
+
